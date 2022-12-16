@@ -1,0 +1,56 @@
+.detail_title {
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: 800;
+    color: #007b00;
+}
+
+.details_button {
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: 800;
+    color: #007b00;
+}
+
+.detail_main {
+    text-align: center;
+}
+
+.detail_main h5 {
+    color: #007b00;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 18px;
+}
+
+.camera_center {
+    display: flex;
+    justify-content: center;
+}
+
+.camera_center_button {
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+}
+
+.color_camera {
+    width: 200px;
+    height: 40px;
+    font-size: 16px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: 800;
+    border-radius: 40px;
+    border-color: #85E11E;
+    border: 1px solid #85E11E;
+    background-color: #005200;
+    transition: background-color 1s;
+    color: #FFF;
+}
+
+.color_camera:hover {
+    color: #000;
+    background-color: #fff;
+    transition: all 1s;
+}
