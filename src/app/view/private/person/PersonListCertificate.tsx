@@ -12,7 +12,7 @@ import { ToastContainer } from "react-toastify";
 
 import "../../../../assets/css/styleBody.css";
 
-export const PersonList = () => {
+export const PersonListCertificate = () => {
   const [arrayPerson, setArrayPerson] = useState<PersonCRUD[]>([]);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -53,7 +53,7 @@ export const PersonList = () => {
 
   const getMePerson = async () => {
     const result = await ServicePrivate.petitionGET(
-      ApiBack.PERSON_PRIVATE_VIEW
+      ApiBack.PERSON_PRIVATE_FILTERCERTIFI
     );
     setArrayPerson(result);
   };
@@ -86,13 +86,12 @@ export const PersonList = () => {
         <h1>Personas</h1>
         <nav>
           <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-            </li>
             <li>
             <a>
             <Link to={"/home/personview/"} className="breadcrumb-item"> Listado de personas</Link>
             </a>
             </li>
+            
           </ol>
         </nav>
       </div>
@@ -103,7 +102,7 @@ export const PersonList = () => {
             Personas certificadas
           </button>
         </Link>
-        <Link to={"/home/personfilterNoCerti/"} >
+        <Link to={"/home/personfilterNoCerti/"}>
           <button className="css-button css-button-3d css-button-3d--sand">
             Personas no certificadas
           </button>

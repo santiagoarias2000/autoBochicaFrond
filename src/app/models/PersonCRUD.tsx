@@ -26,7 +26,7 @@ class PersonCRUD {
   public rh: string;
   public nameStractum: string;
   public nameSisben: string;
-  public typeCivilStatu: string;
+  public typeCivilStatus: string;
   public nameEducationLevel: string;
   public nameCity:string;
   constructor(
@@ -87,7 +87,7 @@ class PersonCRUD {
     this.rh = rh;
     this.nameStractum = naStr;
     this.nameSisben = naSis;
-    this.typeCivilStatu = tyCiSt;
+    this.typeCivilStatus = tyCiSt;
     this.nameEducationLevel = naEdLe;
     this.nameCity =cit;
     this.idPerson = id;

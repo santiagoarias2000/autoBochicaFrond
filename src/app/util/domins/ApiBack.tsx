@@ -32,6 +32,12 @@ const ApiBack = {
   //Person
   PERSON_PRIVATE_VIEW: "/api/private/person/view",
   PERSON_PRIVATE_CREATE: "/api/private/person/create",
+  PERSON_PRIVATE_DETAILS: "/api/private/person/details",
+  PERSON_PRIVATE_DETAILSUP: "/api/private/person/detailsupdate",
+  PERSON_PRIVATE_FILTERCERTIFI: "/api/private/person/filtercertificate",
+  PERSON_PRIVATE_FILTERNOCERTIFI: "/api/private/person/filternocertificate",
+  PERSON_PRIVATE_DELETE: "/api/private/person/delete",
+  PERSON_PRIVATE_UPDATE: "/api/private/person/update",
   //Courses
   COURSES_PRIVATE_VIEW: "/api/private/course/view",
   //Vehicles
@@ -44,5 +50,7 @@ const ApiBack = {
   TUITIONS_PRIVATE_VIEW: "/api/private/tuitions/view",
   //state certificate
   STATECERTIFICATE_PRIVATE_VIEW: "/api/private/statecertificate/view",
+  //Create pdf
+  CREATE_PDF: "/api/private/person/pdf",
 };
 export default ApiBack;

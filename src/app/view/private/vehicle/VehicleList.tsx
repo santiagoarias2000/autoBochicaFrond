@@ -108,7 +108,7 @@ export const VehiclesList = () => {
                 ))}
               </tbody>
             </table>
-            {/* Modal para eliminar */}
+            {/* Modal to delete Vehicles */}
             {/* *********************************************************************************/}
             <Modal
               show={show}
@@ -117,10 +117,10 @@ export const VehiclesList = () => {
               keyboard={false}
             >
               <Modal.Header closeButton>
-                <Modal.Title>Eliminar vehiculo</Modal.Title>
+                <Modal.Title>Eliminar vehículo</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                ¿Realmente desea eliminar el vehiculo con placa?
+                ¿Realmente desea eliminar el vehículo con placa?
                 <br />
                 <strong className="center">
                  &nbsp; {objVehi.licensePlate} 

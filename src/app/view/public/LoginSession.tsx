@@ -54,7 +54,7 @@ export const LoginSession = () => {
         // console.log(result);
         // console.log('si entra esta verga');
         setInProcess(false);
-        myNavegation("/home/identificationcreate");
+        myNavegation("/home");
       } else {
         MensajeToastify("error", "Usuario o contraseña incorrectos", 7000);
         cleanBox(formActual);

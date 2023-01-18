@@ -3,6 +3,7 @@ import CivilStatus from "./CivilStatus";
 import Courses from "./Courses";
 import EducationLevel from "./EducactionLevel";
 import Sisbens from "./Sisbens";
+import StateCertificate from "./StateCertificate";
 import Stratums from "./Stractum";
 import Tuition from "./Tuition";
 import TypesDocuments from "./TypeDocument";
@@ -24,7 +25,7 @@ class Person {
   public idTypeDocument: TypesDocuments;
   public numbers: string;
   public issuedIn: string;
-  public stateCertificate: string;
+  public idStateCertificate: StateCertificate;
   public photo: string;
   public photoFingerprint: string;
   public dateTuition: Date;
@@ -38,7 +39,7 @@ class Person {
   public idCity: Citys;
   public idGender: TypesGenders;
   public idTypeSanguineou: TypesSanguineous;
-
+  public valueReceipt: number;
   constructor(
     id:number,
     firstName: string,
@@ -53,7 +54,7 @@ class Person {
     idTypeDo: TypesDocuments,
     numb: string,
     issued: string,
-    state: string,
+    state: StateCertificate,
     pho: string,
     photof: string,
     date: Date,
@@ -66,7 +67,8 @@ class Person {
     idEducLevel: EducationLevel,
     idCi: Citys,
     idGend: TypesGenders,
-    idTypSange: TypesSanguineous
+    idTypSange: TypesSanguineous,
+    valueR: number
   ) {
     this.idPerson = id;
     this.firstName = firstName;
@@ -88,13 +90,14 @@ class Person {
     this.idTypeDocument = idTypeDo;
     this.numbers = numb;
     this.issuedIn = issued;
-    this.stateCertificate = state;
+    this.idStateCertificate = state;
     this.photo = pho;
     this.dateTuition = date;
     this.photoFingerprint = photof;
     this.idVehicle = idVeh;
     this.idTuition = idTui;
     this.idCourse = idCour;
+    this.valueReceipt = valueR;
   }
 }
 export default Person;

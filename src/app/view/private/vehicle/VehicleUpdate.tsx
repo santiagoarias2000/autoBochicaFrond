@@ -36,7 +36,7 @@ export const VehiclesUpdate = () => {
   } = useForm<Vehicles>(new Vehicles(0, "", "", new Date(), new Date()));
   // *******************************************************************
 
-  // Consulta los datos de un usuario por su _id
+  // Consult to the data for the person, use the idVehicle
   // *******************************************************************
   const getMeOneVehicle = async () => {
     const urlChargerOneVehicle =
@@ -241,7 +241,7 @@ export const VehiclesUpdate = () => {
                 </Form.Group>
               </Form>
             ) : (
-              <div>Cargando información de los perfiles....</div>
+              <div>Cargando información del vehiculos seleccionado....</div>
             )}
           </div>
         </div>

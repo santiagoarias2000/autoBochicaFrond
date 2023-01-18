@@ -25,6 +25,7 @@ import Tuition from "../../../models/Tuition";
 import Courses from "../../../models/Courses";
 import { Link } from "react-router-dom";
 import { ConvertirBase64 } from "../../../util/funtion/ConvertirBase64";
+import StateCertificate from "../../../models/StateCertificate";
 
 export const PersonCreate = () => {
   // Variables
@@ -45,7 +46,7 @@ export const PersonCreate = () => {
     idTypeDocument,
     numbers,
     issuedIn,
-    stateCertificate,
+    idStateCertificate,
     photo,
     photoFingerprint,
     dateTuition,
@@ -59,6 +60,7 @@ export const PersonCreate = () => {
     idCity,
     idGender,
     idTypeSanguineou,
+    valueReceipt,
     doubleLink,
     myObject,
   } = useForm<Person>(
@@ -76,7 +78,7 @@ export const PersonCreate = () => {
       new TypesDocuments(0, ""),
       "",
       "",
-      "",
+      new StateCertificate(0,""),
       "",
       "",
       new Date(),
@@ -89,7 +91,8 @@ export const PersonCreate = () => {
       new EducationLevel(0, ""),
       new Citys(0, ""),
       new TypesGenders(0, ""),
-      new TypesSanguineous(0, "", "")
+      new TypesSanguineous(0, "", ""),
+      0
     )
   );
 
@@ -106,6 +109,8 @@ export const PersonCreate = () => {
   );
   const [arrayVehicles, setArrayVehicles] = useState<Vehicles[]>([]);
   const [arrayTuition, setArrayTuition] = useState<Tuition[]>([]);
+  const [arrayCourse, setArrayCourse] = useState<Courses[]>([]);
+  const [arrayStateCertificate, setArrayStateCertificate] = useState<StateCertificate[]>([]);
 
   //******************************Code for photo
   const seeImagen = async (e: any) => {
@@ -176,6 +181,33 @@ export const PersonCreate = () => {
       ApiBack.VEHICLES_PRIVATE_VIEW
     );
     setArrayVehicles(result);
+    if (result) {
+      setAllFine(true);
+    }
+  };
+  const getMeTuition = async () => {
+    const result = await ServicePrivate.petitionGET(
+      ApiBack.TUITIONS_PRIVATE_VIEW
+    );
+    setArrayTuition(result);
+    if (result) {
+      setAllFine(true);
+    }
+  };  
+  const getMeCourse = async () => {
+    const result = await ServicePrivate.petitionGET(
+      ApiBack.COURSES_PRIVATE_VIEW
+    );
+    setArrayCourse(result);
+    if (result) {
+      setAllFine(true);
+    }
+  };
+  const getMeStaCertificate = async () => {
+    const result = await ServicePrivate.petitionGET(
+      ApiBack.STATECERTIFICATE_PRIVATE_VIEW
+    );
+    setArrayStateCertificate(result);
     if (result) {
       setAllFine(true);
     }
@@ -258,6 +290,9 @@ export const PersonCreate = () => {
     getMeSisben();
     getMeTypeDocument();
     getMeVehicles();
+    getMeTuition();
+    getMeCourse();
+    getMeStaCertificate();
   }, []);
 
   //Camera funtion
@@ -360,14 +395,78 @@ export const PersonCreate = () => {
                     onChange={doubleLink}
                   />
                   <Form.Control.Feedback type="invalid">
-                    Expedida en, es obligatorio
+                    Segundo nombre, es obligatorio
+                  </Form.Control.Feedback>
+                </Col>
+              </Form.Group>
+
+              <Form.Group as={Row} className="mb-3" controlId="idTypeDocument">
+                <Form.Label column sm={2}>
+                  Tipo de documento:
+                </Form.Label>
+                <Col sm={10}>
+                  <Form.Select
+                    required
+                    name="idTypeDocument"
+                    value={idTypeDocument.idTypeDocument}
+                    onChange={doubleLink}
+                  >
+                    <option value="">Seleccione el Tipo de documento</option>
+                    {arrayTypeDocument.map((miIden, index) => (
+                      <option key={index} value={miIden.idTypeDocument}>
+                        {miIden.typeDocument}
+                      </option>
+                    ))}
+                  </Form.Select>
+                  <Form.Control.Feedback type="invalid">
+                    Seleccione la tipo de documento
+                  </Form.Control.Feedback>
+                </Col>
+              </Form.Group>
+
+              <Form.Group as={Row} className="mb-3" controlId="numbers">
+                <Form.Label column sm={2}>
+                  Numeros de identificación:
+                </Form.Label>
+                <Col sm={10}>
+                  <Form.Control
+                    required
+                    type="text"
+                    name="numbers"
+                    placeholder="Ingrese los numeros de la identificación:"
+                    className="form-control"
+                    value={numbers}
+                    onChange={doubleLink}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    Numero de identificación, es obligatorio
+                  </Form.Control.Feedback>
+                </Col>
+              </Form.Group>
+
+              <Form.Group as={Row} className="mb-3" controlId="issuedIn">
+                <Form.Label column sm={2}>
+                  Expedida en:
+                </Form.Label>
+                <Col sm={10}>
+                  <Form.Control
+                    required
+                    type="text"
+                    name="issuedIn"
+                    placeholder="Ingrese lugar de expedición:"
+                    className="form-control"
+                    value={issuedIn}
+                    onChange={doubleLink}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    Ocupaciíon, es obligatorio
                   </Form.Control.Feedback>
                 </Col>
               </Form.Group>
 
               <Form.Group as={Row} className="mb-3" controlId="mail">
                 <Form.Label column sm={2}>
-                  Correo electronico :
+                  Correo electrónico :
                 </Form.Label>
                 <Col sm={10}>
                   <Form.Control
@@ -407,7 +506,7 @@ export const PersonCreate = () => {
 
               <Form.Group as={Row} className="mb-3" controlId="direction">
                 <Form.Label column sm={2}>
-                  Direción:
+                  Dirección:
                 </Form.Label>
                 <Col sm={10}>
                   <Form.Control
@@ -427,7 +526,7 @@ export const PersonCreate = () => {
 
               <Form.Group as={Row} className="mb-3" controlId="phoneNumber">
                 <Form.Label column sm={2}>
-                  Numero de telefono:
+                  Numero de teléfono:
                 </Form.Label>
                 <Col sm={10}>
                   <Form.Control
@@ -440,7 +539,27 @@ export const PersonCreate = () => {
                     onChange={doubleLink}
                   />
                   <Form.Control.Feedback type="invalid">
-                    Numero de telefono, es obligatorio
+                    Numero de teléfono, es obligatorio
+                  </Form.Control.Feedback>
+                </Col>
+              </Form.Group>
+
+              <Form.Group as={Row} className="mb-3" controlId="valueReceipt">
+                <Form.Label column sm={2}>
+                  Valor del curso:
+                </Form.Label>
+                <Col sm={10}>
+                  <Form.Control
+                    required
+                    type="text"
+                    name="valueReceipt"
+                    placeholder="Ingrese el valor del curso:"
+                    className="form-control"
+                    value={valueReceipt}
+                    onChange={doubleLink}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    El valor del curso, es obligatorio
                   </Form.Control.Feedback>
                 </Col>
               </Form.Group>
@@ -460,7 +579,7 @@ export const PersonCreate = () => {
                     onChange={doubleLink}
                   />
                   <Form.Control.Feedback type="invalid">
-                    Ocupaciíon, es obligatorio
+                    Ocupacíon, es obligatorio
                   </Form.Control.Feedback>
                 </Col>
               </Form.Group>
@@ -589,90 +708,26 @@ export const PersonCreate = () => {
                 </Col>
               </Form.Group>
 
-              <Form.Group as={Row} className="mb-3" controlId="idTypeDocument">
+              <Form.Group as={Row} className="mb-3" controlId="idStateCertificate">
                 <Form.Label column sm={2}>
-                  Tipo de documento:
+                  Estado de certificado:
                 </Form.Label>
                 <Col sm={10}>
                   <Form.Select
                     required
-                    name="idTypeDocument"
-                    value={idTypeDocument.idTypeDocument}
+                    name="idStateCertificate"
+                    value={idStateCertificate.idStateCertificate}
                     onChange={doubleLink}
                   >
-                    <option value="">Seleccione el Tipo de documento</option>
-                    {arrayTypeDocument.map((miIden, index) => (
-                      <option key={index} value={miIden.idTypeDocument}>
-                        {miIden.typeDocument}
+                    <option value="">Seleccione el Tipo de estado de certificado</option>
+                    {arrayStateCertificate.map((miIden, index) => (
+                      <option key={index} value={miIden.idStateCertificate}>
+                        {miIden.stateCertificate}
                       </option>
                     ))}
                   </Form.Select>
                   <Form.Control.Feedback type="invalid">
-                    Seleccione la tipo de documento
-                  </Form.Control.Feedback>
-                </Col>
-              </Form.Group>
-
-              <Form.Group as={Row} className="mb-3" controlId="numbers">
-                <Form.Label column sm={2}>
-                  Numeros de identificacion:
-                </Form.Label>
-                <Col sm={10}>
-                  <Form.Control
-                    required
-                    type="text"
-                    name="numbers"
-                    placeholder="Ingrese los numeros de la identificación:"
-                    className="form-control"
-                    value={numbers}
-                    onChange={doubleLink}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    Ocupaciíon, es obligatorio
-                  </Form.Control.Feedback>
-                </Col>
-              </Form.Group>
-
-              <Form.Group as={Row} className="mb-3" controlId="issuedIn">
-                <Form.Label column sm={2}>
-                  Expedida en:
-                </Form.Label>
-                <Col sm={10}>
-                  <Form.Control
-                    required
-                    type="text"
-                    name="issuedIn"
-                    placeholder="Ingrese lugar de expedición:"
-                    className="form-control"
-                    value={issuedIn}
-                    onChange={doubleLink}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    Ocupaciíon, es obligatorio
-                  </Form.Control.Feedback>
-                </Col>
-              </Form.Group>
-
-              <Form.Group
-                as={Row}
-                className="mb-3"
-                controlId="stateCertificate"
-              >
-                <Form.Label column sm={2}>
-                  Estado de certificación:
-                </Form.Label>
-                <Col sm={10}>
-                  <Form.Control
-                    required
-                    type="text"
-                    name="stateCertificate"
-                    placeholder="Ingrese lugar de expedición:"
-                    className="form-control"
-                    value={stateCertificate}
-                    onChange={doubleLink}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    Ocupaciíon, es obligatorio
+                    Seleccione el estado del certificación
                   </Form.Control.Feedback>
                 </Col>
               </Form.Group>
@@ -772,6 +827,54 @@ export const PersonCreate = () => {
                 </Col>
               </Form.Group>
 
+              <Form.Group as={Row} className="mb-3" controlId="idTuition">
+                <Form.Label column sm={2}>
+                  Tipo de matricula:
+                </Form.Label>
+                <Col sm={10}>
+                  <Form.Select
+                    required
+                    name="idTuition"
+                    value={idTuition.idTuition}
+                    onChange={doubleLink}
+                  >
+                    <option value="">Seleccione la matricula</option>
+                    {arrayTuition.map((miIden, index) => (
+                      <option key={index} value={miIden.idTuition}>
+                        {miIden.nameTuition}
+                      </option>
+                    ))}
+                  </Form.Select>
+                  <Form.Control.Feedback type="invalid">
+                    Seleccione la matricula
+                  </Form.Control.Feedback>
+                </Col>
+              </Form.Group>
+
+              <Form.Group as={Row} className="mb-3" controlId="idCourse">
+                <Form.Label column sm={2}>
+                  Tipo de curso:
+                </Form.Label>
+                <Col sm={10}>
+                  <Form.Select
+                    required
+                    name="idCourse"
+                    value={idCourse.idCourse}
+                    onChange={doubleLink}
+                  >
+                    <option value="">Seleccione la curso</option>
+                    {arrayCourse.map((miIden, index) => (
+                      <option key={index} value={miIden.idCourse}>
+                        {miIden.nameCourse} - {miIden.timeCourse}
+                      </option>
+                    ))}
+                  </Form.Select>
+                  <Form.Control.Feedback type="invalid">
+                    Seleccione la matricula
+                  </Form.Control.Feedback>
+                </Col>
+              </Form.Group>
+
               <Form.Group as={Row} className="mb-3" controlId="photo">
                 <Form.Label column sm={2}>
                   <span>
@@ -782,7 +885,6 @@ export const PersonCreate = () => {
                   <Form.Control
                     size="sm"
                     accept="image/png, image/jpeg"
-                    required
                     type="file"
                     name="photo"
                     className="form-control"

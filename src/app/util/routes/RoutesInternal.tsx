@@ -17,41 +17,54 @@ import { VehiclesDetails } from "../../view/private/vehicle/VehiclesDetails";
 import { VehiclesUpdate } from "../../view/private/vehicle/VehicleUpdate";
 import { StateCertificateList } from "../../view/private/stateCertificate/StateCertificate";
 import camera from "../../view/private/person/camera";
+import { PersonDetails } from "../../view/private/person/PersonDetails";
+import { PersonUpdate } from "../../view/private/person/PersonUpdate";
+import { PersonListCertificate } from "../../view/private/person/PersonListCertificate";
+import { PersonListNoCertificate } from "../../view/private/person/PersonListNoCertificate";
+import { PdfRenderPerson } from "../../view/private/person/PdfRenderPersonDetails";
 
+/*Consts to create from lazy use the routes*/
+//Stractum
 const LazyStratumList = lazy(() =>
   import("../../view/private/stractum/StractumList").then(() => ({
     default: StratumList,
   }))
 );
+//Sisben
 const LazySisbenList = lazy(() =>
   import("../../view/private/sisben/SisbenList").then(() => ({
     default: SisbenList,
   }))
 );
+//City
 const LazyCityList = lazy(() =>
   import("../../view/private/city/CityList").then(() => ({ default: CityList }))
 );
+//Education level
 const LazyEduLevelList = lazy(() =>
   import("../../view/private/educationlevel/EducationLevel").then(() => ({
     default: EduLevelList,
   }))
 );
+//Type document
 const LazyTDocumentList = lazy(() =>
   import("../../view/private/typeDocument/TypeDocumentList").then(() => ({
     default: TypeDocumentList,
   }))
 );
+//Type Gender
 const LazyTGenderList = lazy(() =>
   import("../../view/private/typeGender/TypeGenderList").then(() => ({
     default: TypeGenderList,
   }))
 );
+//Type Sanguineum
 const LazyTSanguiList = lazy(() =>
   import("../../view/private/typeSanguineos/TypeSanguineosList").then(() => ({
     default: TypeSanguineousList,
   }))
 );
-
+//Person Lazy routes
 const LazyPersonList = lazy(() =>
   import("../../view/private/person/PersonList").then(() => ({
     default: PersonList,
@@ -62,11 +75,39 @@ const LazyPersonCreate = lazy(() =>
     default: PersonCreate,
   }))
 );
+const LazyPersonDetails = lazy(() =>
+  import("../../view/private/person/PersonDetails").then(() => ({
+    default: PersonDetails,
+  }))
+);
+const LazyPersonUpdate = lazy(() =>
+  import("../../view/private/person/PersonUpdate").then(() => ({
+    default: PersonUpdate,
+  }))
+);
+const LazyPersonFilterCerti = lazy(() =>
+  import("../../view/private/person/PersonListCertificate").then(() => ({
+    default: PersonListCertificate,
+  }))
+);
+const LazyPersonFilterNoCerti = lazy(() =>
+  import("../../view/private/person/PersonListNoCertificate").then(() => ({
+    default: PersonListNoCertificate,
+  }))
+);
+//Person Create Pdf
+const LazyPersonPdf = lazy(() =>
+  import("../../view/private/person/PdfRenderPersonDetails").then(() => ({
+    default: PdfRenderPerson,
+  }))
+);
+//Course
 const LazyCoursesList = lazy(() =>
   import("../../view/private/courses/CoursesList").then(() => ({
     default: CoursesList,
   }))
 );
+//Vehicles
 const LazyVehiclesList = lazy(() =>
   import("../../view/private/vehicle/VehicleList").then(() => ({
     default: VehiclesList,
@@ -87,21 +128,27 @@ const LazyVehiclesUpdate = lazy(() =>
     default: VehiclesUpdate,
   }))
 );
+//Tuition
 const LazyTuitionLazy = lazy(() =>
   import("../../view/private/tuition/TuitionList").then(() => ({
     default: TuitionList,
   }))
 );
+//State Certificate
 const LazyStateCertificateLazy = lazy(() =>
   import("../../view/private/stateCertificate/StateCertificate").then(() => ({
     default: StateCertificateList,
   }))
 );
+//Camera to create person on de photo
 const LazyCamerateLazy = lazy(() =>
   import("../../view/private/person/camera").then(() => ({
     default: camera,
   }))
 );
+
+//pdf
+
 
 export const RoutesInternal = () => {
   return (
@@ -123,20 +170,36 @@ export const RoutesInternal = () => {
       //Person
       <Route path="/personview" element={<LazyPersonList />} />
       <Route path="/personcreate" element={<LazyPersonCreate />} />
+      <Route path="/persondetails/:idPerson" element={<LazyPersonDetails />} />
+      <Route path="/personupdate/:idPerson" element={<LazyPersonUpdate />} />
+      <Route path="/personfilterCerti" element={<LazyPersonFilterCerti />} />
+      <Route
+        path="/personfilterNoCerti"
+        element={<LazyPersonFilterNoCerti />}
+      />
       //Courses
       <Route path="/coursesview" element={<LazyCoursesList />} />
       //Vehicles
       <Route path="/vehiclesview" element={<LazyVehiclesList />} />
       <Route path="/vehiclescreate" element={<LazyVehiclesCreate />} />
-      <Route path="/vehiclesdetails/:idVehicle" element={<LazyVehiclesDetails />} />
-      <Route path="/vehiclesupdate/:idVehicle" element={<LazyVehiclesUpdate />} />
+      <Route
+        path="/vehiclesdetails/:idVehicle"
+        element={<LazyVehiclesDetails />}
+      />
+      <Route
+        path="/vehiclesupdate/:idVehicle"
+        element={<LazyVehiclesUpdate />}
+      />
       //Tuition
       <Route path="/tuitionview" element={<LazyTuitionLazy />} />
       //Satate certificate
-      <Route path="/statecertificateview" element={<LazyStateCertificateLazy />} />
+      <Route
+        path="/statecertificateview"
+        element={<LazyStateCertificateLazy />}
+      />
       <Route path="/cameraview" element={<LazyCamerateLazy />} />
-
-
+      //PDF create with data to person
+      <Route path="/pdfRender/:idPerson" element={<LazyPersonPdf />} />
     </Routes>
   );
 };

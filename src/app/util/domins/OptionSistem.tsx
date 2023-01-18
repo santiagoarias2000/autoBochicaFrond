@@ -1,7 +1,6 @@
 const optionAdmin = [
     { nombre: "Cetificados", icono: "bi bi-grid", ruta: "/home/personcreate", hijos: [], },
     { nombre: "Creacion personas", icono: "bi bi-clipboard-data", ruta: "", hijos: [
-        { nombre: "identificacion", icono: "bi bi-circle", ruta: "/home/personcreate", },
         { nombre: "Listado de personas", icono: "bi bi-circle", ruta: "/home/personview", },
         { nombre: "Administración", icono: "bi bi-circle", ruta: "/home/profilAdmin", },
       ]
